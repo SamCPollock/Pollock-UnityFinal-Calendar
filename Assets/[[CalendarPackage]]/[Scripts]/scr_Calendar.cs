@@ -61,6 +61,7 @@ public class scr_Calendar : MonoBehaviour
 
     private void SetDayNumbers()
     {
+        Debug.Log("SETTING DAY NUMBeRS");
         for(int i = 0; i < calendarDaysGridLayoutGroup.transform.childCount; i++)
         {
             Transform childDay = calendarDaysGridLayoutGroup.transform.GetChild(i);
@@ -69,6 +70,7 @@ public class scr_Calendar : MonoBehaviour
         }
     }
 
+    #region Optional Features
     //private void SetSeasonColors()
     //{
     //    Transform childDay = calendarDaysGridLayoutGroup.transform.GetChild(i);
@@ -105,15 +107,13 @@ public class scr_Calendar : MonoBehaviour
 
     //    }
     //}
-
+    #endregion
 
     public void SetCurrentDay(float dayToSet)
     {
       
-        Debug.Log("THE DAY IS" + dayToSet);
         currentDay = (int)dayToSet;
 
-        Debug.Log("CURRENT DAY IS" + currentDay);
 
 
         if (currentDay > 0)
