@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DayTraits")]
 public class so_SpecialEvent : ScriptableObject
 {
-    //public int date;
     public Sprite dayImage;
 
     public Color dayLightColor;
@@ -17,7 +16,8 @@ public class so_SpecialEvent : ScriptableObject
     public List<float> hoursToWatchFor = new List<float>();
     public AudioClip soundEffectThatPlaysAtHours;
 
-    //public List<so_SpecialEvent> specialThings = new List<so_SpecialEvent>();
+    public bool doesPutPlayerInSnow;
+
 
     public void DayStart()
     {
@@ -34,6 +34,11 @@ public class so_SpecialEvent : ScriptableObject
                 scr_DayManager.soundEffect = soundEffectThatPlaysAtHours;
             }
         }
+
+        if (doesPutPlayerInSnow)
+        {
+            GameObject.FindObjectOfType<FootstepSounds>().isInSnow = true;
+        }
     }
 
     public void DayEnd()
@@ -44,6 +49,11 @@ public class so_SpecialEvent : ScriptableObject
         scr_DayManager.hoursToWatchFor.Clear();
         scr_DayManager.soundEffect = null;
         scr_DayManager.SetDaylightColor(Color.white);
+
+        if (doesPutPlayerInSnow)
+        {
+            GameObject.FindObjectOfType<FootstepSounds>().isInSnow = false;
+        }
 
 
     }

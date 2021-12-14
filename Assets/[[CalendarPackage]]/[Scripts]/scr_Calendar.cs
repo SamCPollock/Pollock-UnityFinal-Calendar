@@ -21,11 +21,6 @@ public class scr_Calendar : MonoBehaviour
 
     public GameObject specialDayPrefab;
 
-    //public List<int[,,]> specialDatesList = new List<int[,,]>();
-    //[SerializeField]
-
-    //public Dictionary<int, float> specialDatesDictionary = new Dictionary<int, float>();
-
     [SerializeField]
     public List<Day> dayList = new List<Day>();
 
@@ -41,7 +36,6 @@ public class scr_Calendar : MonoBehaviour
     private void Start()
     {
         SetGridSize();
-        //InstantiateCalendarDays();
         SetCurrentDay(currentDay);
         SetDayNumbers();
         SetSpecialDays();
@@ -115,6 +109,7 @@ public class scr_Calendar : MonoBehaviour
 
     public void SetCurrentDay(float dayToSet)
     {
+      
         Debug.Log("THE DAY IS" + dayToSet);
         currentDay = (int)dayToSet;
 
@@ -160,30 +155,5 @@ public class Day
     public so_SpecialEvent specialEvent; 
 
     public int date;
-    //public Sprite dayImage;
-    //public GameObject particleEffect;
-
-    //public List<float> hoursToWatchFor = new List<float>();
-    //public AudioClip soundEffectThatPlaysAtHours;
-
-    ////public List<so_SpecialEvent> specialThings = new List<so_SpecialEvent>();
-
-    //public void DayStart()
-    //{
-    //    particleEffect.SetActive(true);
-
-    //    foreach (float hour in hoursToWatchFor)
-    //    {
-    //        scr_DayManager.hoursToWatchFor.Add(hour);
-    //        scr_DayManager.soundEffect = soundEffectThatPlaysAtHours;
-    //    }
-    //}
-
-    //public void DayEnd()
-    //{
-    //    particleEffect.SetActive(false);
-    //    scr_DayManager.hoursToWatchFor.Clear();
-    //    scr_DayManager.soundEffect = null;
-
-    //}
+  
 }

@@ -16,24 +16,18 @@ public class scr_TimePasser : MonoBehaviour
     public static float currentSeconds;
     public static float currentDay;
 
-    //public delegate void timeDelegate();
-    //public timeDelegate hourPassed;
-
-//    public static event UnityAction myStaticEvent;
     public static event UnityAction<float> hourPassedEvent;
     public static event UnityAction<float> dayPassedEvent;
 
     public float startingDay;
     private TextMeshProUGUI timeDisplay;
     private scr_Calendar calendar;
-    //private Light2D globalLight; 
 
 
     private void Start()
     {
         timeDisplay = GameObject.Find("Time").GetComponentInChildren<TextMeshProUGUI>();
         calendar = GameObject.Find("Calendar").GetComponent<scr_Calendar>();
-        //globalLight = GameObject.Find("Global Light 2D").GetComponent<Light2D>();
 
         currentDay = startingDay;
         currentHours = 0;
@@ -56,37 +50,33 @@ public class scr_TimePasser : MonoBehaviour
     {
         currentSeconds += (Time.deltaTime * rateOfTimePassage);
 
-        if (currentSeconds >= 1)
+        if (currentSeconds >= 10)
         {
             currentSeconds = 0;
             currentMinutes++;
         }
-        if (currentMinutes >= 1)
+        if (currentMinutes >= 10)
         {
             currentMinutes = 0;
             currentHours++;
-            //SetTimeOfDay();
-
-            //hourPassed?.Invoke();
+ 
             hourPassedEvent?.Invoke(currentHours);
         }
         if (currentHours >= 24)
         {
             currentHours = 0;
             currentDay++;
-            //scr_Calendar.currentDay++;
-            //calendar.SetCurrentDay();
+            if (currentDay > 27)
+            {
+                currentDay = 0;
+            }
+       
             dayPassedEvent?.Invoke(currentDay);
         }
 
 
         string fullTime = "TIME: " + currentHours.ToString("00") + ":" + currentMinutes.ToString("00") + ":" + ((int)currentSeconds).ToString("00");
         timeDisplay.text = fullTime;
-
-    }
-
-    private void SetTimeOfDay()
-    {
 
     }
 

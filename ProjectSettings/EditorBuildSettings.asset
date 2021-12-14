@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/[Scenes]/Overworld.unity
+    path: Assets/[[CalendarPackage]]/[Scenes]/Overworld.unity
     guid: 60cab6b4b995a324596414064ab5e6bc
   - enabled: 1
     path: Assets/Scenes/City.unity
