@@ -16,6 +16,6 @@ MonoBehaviour:
   dayLightColor: {r: 1, g: 0.8607794, b: 0, a: 0}
   chanceOfSnow: 0
   chanceOfRain: 0
-  hoursToWatchFor:
-  - 1
-  soundEffectThatPlaysAtHours: {fileID: 8300000, guid: 3176dc496e292cf4baafa0b1051673e0, type: 3}
+  hoursToWatchFor: []
+  soundEffectThatPlaysAtHours: {fileID: 0}
+  doesPutPlayerInSnow: 0

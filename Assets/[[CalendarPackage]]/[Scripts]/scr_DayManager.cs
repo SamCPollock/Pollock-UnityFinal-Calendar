@@ -48,8 +48,4 @@ public class scr_DayManager : MonoBehaviour
         //globalLight.intensity = brightness;
     }
 
-    public void StartDay()
-    {
-
-    }
 }
