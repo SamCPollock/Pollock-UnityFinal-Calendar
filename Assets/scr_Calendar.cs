@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class scr_Calendar : MonoBehaviour
 {
@@ -18,13 +19,15 @@ public class scr_Calendar : MonoBehaviour
     [SerializeField]
     public GameObject dayPrefab;
 
+    public GameObject specialDayPrefab;
+
     //public List<int[,,]> specialDatesList = new List<int[,,]>();
     //[SerializeField]
 
     //public Dictionary<int, float> specialDatesDictionary = new Dictionary<int, float>();
 
-    //[SerializeField]
-    //public List<Day> dayList = new List<Day>();
+    [SerializeField]
+    public List<Day> dayList = new List<Day>();
 
 
     [Header("CalendarUIDimensions")]
@@ -39,7 +42,14 @@ public class scr_Calendar : MonoBehaviour
     {
         SetGridSize();
         //InstantiateCalendarDays();
-        SetCurrentDay();
+        SetCurrentDay(currentDay);
+        SetDayNumbers();
+        SetSpecialDays();
+    }
+
+    private void OnEnable()
+    {
+        scr_TimePasser.dayPassedEvent += SetCurrentDay; 
     }
 
     private void SetGridSizeBasedOnCustomCalendar()
@@ -55,30 +65,125 @@ public class scr_Calendar : MonoBehaviour
         calendarDaysGridLayoutGroup.cellSize = new Vector2((usableCalendarWidth / daysInWeek), (usableCalendarHeight / weeksInMonth));
     }
 
+    private void SetDayNumbers()
+    {
+        for(int i = 0; i < calendarDaysGridLayoutGroup.transform.childCount; i++)
+        {
+            Transform childDay = calendarDaysGridLayoutGroup.transform.GetChild(i);
+
+            childDay.GetComponentInChildren<TextMeshProUGUI>().text = (i + 1).ToString();
+        }
+    }
+
+    //private void SetSeasonColors()
+    //{
+    //    Transform childDay = calendarDaysGridLayoutGroup.transform.GetChild(i);
+    //    for (int i = 0; i < calendarDaysGridLayoutGroup.transform.childCount; i++)
+    //    {
+
+    //        if (i < daysInWeek)
+    //        {
+    //            childDay.gameObject.GetComponent<Image>().color = Color.yellow;
+    //        }
+    //        else if (i < daysInWeek * 2)
+    //        {
+    //            childDay.gameObject.GetComponent<Image>().color = Color.red;
+    //        }
+    //        else if (i < daysInWeek * 3)
+    //        {
+    //            childDay.gameObject.GetComponent<Image>().color = Color.green;
+    //        }
+    //        else if (i < daysInWeek * 4)
+    //        {
+    //            childDay.gameObject.GetComponent<Image>().color = Color.blue;
+    //        }
+    //    }
+    //}
+
     // Use this for adding calendar days using the script instead of manually adding them in.
     //private void InstantiateCalendarDays()
     //{
     //    int totalDays = daysInWeek * weeksInMonth;
-        
+
     //    for (int i = 0; i < totalDays; i++)
     //    {
     //        GameObject newDay = Instantiate(dayPrefab, calendarDaysGridLayoutGroup.transform);
-            
+
     //    }
     //}
 
 
-    public static void SetCurrentDay()
+    public void SetCurrentDay(float dayToSet)
     {
+        Debug.Log("THE DAY IS" + dayToSet);
+        currentDay = (int)dayToSet;
+
+        Debug.Log("CURRENT DAY IS" + currentDay);
+
+
         if (currentDay > 0)
-            calendarDaysGridLayoutGroup.transform.GetChild(currentDay -1 ).GetComponent<Image>().color = Color.gray;
-        calendarDaysGridLayoutGroup.transform.GetChild(currentDay).GetComponent<Image>().color = Color.cyan;
+        {
+            calendarDaysGridLayoutGroup.transform.GetChild(currentDay - 1).GetComponent<Image>().color = Color.gray;
+        }
+        calendarDaysGridLayoutGroup.transform.GetChild(currentDay).GetComponent<Image>().color = Color.cyan;    // Color indicating which day is today.
+
+
+        foreach(Day specialDay in dayList)
+        {
+            if (currentDay == specialDay.date - 1)   // Check if it is a specialDay
+            {
+                specialDay.specialEvent.DayStart();
+            }
+
+            if (currentDay - 1 == specialDay.date - 1) // Check if the day ending was a special day, to disable special effects.
+            {
+                specialDay.specialEvent.DayEnd();
+            }
+        }
+    }
+
+    public void SetSpecialDays()
+    {
+        foreach(Day specialDay in dayList)
+        {
+            GameObject day = calendarDaysGridLayoutGroup.transform.GetChild(specialDay.date - 1).gameObject;
+            GameObject specialDayObject = Instantiate(specialDayPrefab, day.transform);
+            specialDayObject.GetComponent<Image>().sprite = specialDay.specialEvent.dayImage;
+
+        }
     }
 }
 
-//[System.Serializable]
-//public class Day
-//{
-//    public int date;
-//    public List<int> specialThings = new List<int>();
-//}
+[System.Serializable]
+public class Day
+{
+    public so_SpecialEvent specialEvent; 
+
+    public int date;
+    //public Sprite dayImage;
+    //public GameObject particleEffect;
+
+    //public List<float> hoursToWatchFor = new List<float>();
+    //public AudioClip soundEffectThatPlaysAtHours;
+
+    ////public List<so_SpecialEvent> specialThings = new List<so_SpecialEvent>();
+
+    //public void DayStart()
+    //{
+    //    particleEffect.SetActive(true);
+
+    //    foreach (float hour in hoursToWatchFor)
+    //    {
+    //        scr_DayManager.hoursToWatchFor.Add(hour);
+    //        scr_DayManager.soundEffect = soundEffectThatPlaysAtHours;
+    //    }
+    //}
+
+    //public void DayEnd()
+    //{
+    //    particleEffect.SetActive(false);
+    //    scr_DayManager.hoursToWatchFor.Clear();
+    //    scr_DayManager.soundEffect = null;
+
+    //}
+}

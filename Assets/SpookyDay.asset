@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db28b9bcdf3fa2742b5f93a29a437811, type: 3}
-  m_Name: WinterDay
+  m_Name: SpookyDay
   m_EditorClassIdentifier: 
-  dayImage: {fileID: 21300000, guid: 4deaf727f6e13e446bc37b0bef3321c9, type: 3}
-  dayLightColor: {r: 0, g: 0.7518301, b: 1, a: 0}
-  chanceOfSnow: 100
-  chanceOfRain: 0
+  dayImage: {fileID: 21300000, guid: a8fba8bf13cc5e5438bfad89cbb0b7ce, type: 3}
+  dayLightColor: {r: 0.8018868, g: 0, b: 0.7273741, a: 0}
+  chanceOfSnow: 0
+  chanceOfRain: 100
   hoursToWatchFor: []
-  soundEffectThatPlaysAtHours: {fileID: 8300000, guid: 3176dc496e292cf4baafa0b1051673e0, type: 3}
+  soundEffectThatPlaysAtHours: {fileID: 0}

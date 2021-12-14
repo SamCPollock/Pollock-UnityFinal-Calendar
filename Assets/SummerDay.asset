@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db28b9bcdf3fa2742b5f93a29a437811, type: 3}
-  m_Name: WinterDay
+  m_Name: SummerDay
   m_EditorClassIdentifier: 
-  dayImage: {fileID: 21300000, guid: 4deaf727f6e13e446bc37b0bef3321c9, type: 3}
-  dayLightColor: {r: 0, g: 0.7518301, b: 1, a: 0}
-  chanceOfSnow: 100
+  dayImage: {fileID: 21300000, guid: 58b20d0f891eb5c4d827fa8e4706c81c, type: 3}
+  dayLightColor: {r: 1, g: 0, b: 0.13820696, a: 0}
+  chanceOfSnow: 0
   chanceOfRain: 0
   hoursToWatchFor: []
-  soundEffectThatPlaysAtHours: {fileID: 8300000, guid: 3176dc496e292cf4baafa0b1051673e0, type: 3}
+  soundEffectThatPlaysAtHours: {fileID: 0}
